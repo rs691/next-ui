@@ -185,7 +185,7 @@ export default function Home() {
 
             <Heading wrap="balance" variant="display-default-l" align="center" marginBottom="16">
               My name is Robert Stewart and I am a software engineer.
-              I have a penis named Henry.
+              
             </Heading>
 
             <Column horizontal="center" paddingTop="64" fillWidth gap="24">
