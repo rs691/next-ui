@@ -1,39 +1,57 @@
 "use client";
 
 import React, { useState } from "react";
-import { MdOutlineCastForEducation } from "react-icons/md";
 
 import {
   Heading,
   Text,
   Button,
   Icon,
-SmartLink,
-
+  InlineCode,
+  Logo,
+  Input,
+  Avatar,
+  AvatarGroup,
+  Textarea,
+  PasswordInput,
+  SegmentedControl,
+  SmartLink,
+  Dialog,
+  Feedback,
+  SmartImage,
   Line,
-
+  LogoCloud,
   Background,
-
-
+  Select,
+  useToast,
   Card,
   Fade,
-
-
+  StatusIndicator,
+  DateRangePicker,
+  DateRange,
   TiltFx,
   HoloFx,
   IconButton,
-
+  TagInput,
+  Switch,
   Column,
   Row,
   StyleOverlay,
 } from "@/once-ui/components";
-
+import { CodeBlock, MediaUpload } from "@/once-ui/modules";
 
 export default function Home() {
   const [selectedValue, setSelectedValue] = useState("");
-
-
-
+  const [selectedRange, setSelectedRange] = useState<DateRange>();
+  const [isFirstDialogOpen, setIsFirstDialogOpen] = useState(false);
+  const [isSecondDialogOpen, setIsSecondDialogOpen] = useState(false);
+  const [firstDialogHeight, setFirstDialogHeight] = useState<number>();
+  const { addToast } = useToast();
+  const [intro, setIntro] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [tags, setTags] = useState<string[]>(["UX / UI", "Design systems", "AI / ML"]);
+  const [twoFA, setTwoFA] = useState(false);
 
   const handleSelect = (value: string) => {
     console.log("Selected option:", value);
@@ -58,9 +76,25 @@ export default function Home() {
     },
   ];
 
+  const validateIntro = (value: React.ReactNode) => {
+    if (typeof value === "string" && value.length < 10) {
+      return (
+        <Row horizontal="center" marginBottom="12" gap="8">
+          <Icon name="errorCircle" />
+          Intro must be at least 10 characters long.
+        </Row>
+      );
+    }
+    return null;
+  };
 
-
-
+  const validateLogin = () => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regex.test(email)) {
+      return "Email and / or password is invalid.";
+    }
+    return null;
+  };
 
   return (
     <Column fillWidth paddingY="80" paddingX="s" horizontal="center" flex={1}>
@@ -78,7 +112,6 @@ export default function Home() {
         fillWidth
         blur={0.25}
       />
-     <MdOutlineCastForEducation />
       <Row position="fixed" top="0" fillWidth horizontal="center" zIndex={3}>
         <Row
           data-border="rounded"
@@ -88,9 +121,9 @@ export default function Home() {
           paddingLeft="32"
           paddingY="20"
         >
-
+        
           <Row gap="12" hide="s">
-
+            
             <Button
               href="https://github.com/once-ui-system/nextjs-starter"
               prefixIcon="github"
@@ -102,7 +135,7 @@ export default function Home() {
             <StyleOverlay top="20" right="24" />
           </Row>
           <Row gap="16" show="s" horizontal="center" paddingRight="24">
-
+         
             <IconButton
               href="https://github.com/once-ui-system/nextjs-starter"
               icon="github"
@@ -112,7 +145,6 @@ export default function Home() {
           </Row>
         </Row>
       </Row>
-
       <Column
         overflow="hidden"
         as="main"
@@ -182,19 +214,18 @@ export default function Home() {
             }}
           />
           <Column fillWidth horizontal="center" gap="32" padding="32" position="relative">
-
+     
             <Heading wrap="balance" variant="display-default-l" align="center" marginBottom="16">
-              My name is Robert Stewart and I am a software engineer.
-              I have a penis named Henry.
+           My name is Robert Stewart and I am a software engineer.
             </Heading>
-
+           
             <Column horizontal="center" paddingTop="64" fillWidth gap="24">
               <Line maxWidth={4} marginBottom="16" background="neutral-alpha-medium" />
-
+              
               <Row fillWidth gap="24" horizontal="center">
               </Row>
-
-
+              
+            
             </Column>
           </Column>
           <Column fillWidth paddingX="32" gap="12" horizontal="center" position="relative">
@@ -203,7 +234,7 @@ export default function Home() {
             </Heading>
             <Text marginBottom="32" align="center" onBackground="neutral-weak">
               Tiny snippets to inspire your next project
-
+            
             </Text>
 
             {/* LOGIN */}
@@ -215,7 +246,7 @@ export default function Home() {
               border="neutral-alpha-weak"
               overflow="hidden"
             >
-
+           
               <Column fillWidth horizontal="center" gap="20" padding="32" position="relative">
                 <Background
                   mask={{
@@ -232,14 +263,14 @@ export default function Home() {
                     height: "1rem",
                   }}
                 />
-
+                
                 <Heading as="h3" variant="display-default-s">
-                  ssssss
+                ssssss
                 </Heading>
-
+            
                 <Column fillWidth gap="8">
-
-
+                 
+                 
                 </Column>
                 <Row fillWidth paddingY="24">
                   <Row onBackground="neutral-weak" fillWidth gap="24" vertical="center">
@@ -247,10 +278,10 @@ export default function Home() {
                   </Row>
                 </Row>
                 <Column gap="-1" fillWidth>
-
-
+                 
+                
                 </Column>
-
+           
               </Column>
             </Row>
           </Column>
@@ -314,7 +345,7 @@ export default function Home() {
                     colorEnd: "accent-solid-weak",
                   }}
                 >
-
+                
                 </Background>
               </HoloFx>
             </TiltFx>
@@ -322,13 +353,13 @@ export default function Home() {
           <Column position="relative" fillWidth gap="-1">
             <Row fillWidth vertical="center" horizontal="space-between" marginBottom="32">
               <Heading as="h3" variant="display-default-xs">
-                I love your heading
+               I love your heading
               </Heading>
-
+        
             </Row>
-
+           
             <Row fillWidth gap="-1">
-
+             
             </Row>
           </Column>
         </Row>
@@ -368,11 +399,11 @@ export default function Home() {
             position="relative"
           >
             <Row fillWidth horizontal="center" gap="-1">
-
-
+        
+       
             </Row>
             <Row fillWidth horizontal="center">
-
+             
             </Row>
           </Column>
         </Row>
@@ -411,7 +442,7 @@ export default function Home() {
             }}
           />
           <Column maxWidth={32} gap="-1">
-
+        
             <Column
               background="page"
               radius={undefined}
@@ -422,7 +453,7 @@ export default function Home() {
               horizontal="center"
               border="neutral-medium"
             >
-
+             
               <Column
                 paddingTop="160"
                 paddingX="32"
@@ -432,17 +463,17 @@ export default function Home() {
                 horizontal="center"
                 gap="8"
               >
-
-
-
-
+               
+              
+              
+         
                 <Column paddingY="32" fillWidth gap="-1">
-
+              
                 </Column>
-
-
-
-
+              
+             
+              
+               
               </Column>
             </Column>
           </Column>
@@ -499,9 +530,9 @@ export default function Home() {
             />
             <Column horizontal="center" gap="48" fillWidth position="relative">
               <Heading align="center" as="h2" variant="display-default-l">
-                Heading
+              Heading
               </Heading>
-
+             
             </Column>
           </Column>
         </TiltFx>
@@ -530,7 +561,7 @@ export default function Home() {
             }}
           />
           <Row position="relative" textVariant="display-default-m" align="center">
-            Another heading
+          Another heading
           </Row>
         </Row>
         <Row fillWidth overflow="hidden">
@@ -548,13 +579,13 @@ export default function Home() {
                   border={undefined}
                   radius={undefined}
                 >
-
-
+              
+                 
                 </Card>
               </SmartLink>
             ))}
           </Row>
-
+        
         </Row>
         <Row
           position="relative"
@@ -587,17 +618,17 @@ export default function Home() {
             fillWidth
             gap="16"
           >
-
-
+            
+        
             <SmartLink href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">
-              Robert Stewart
+             Robert Stewart
             </SmartLink>
           </Column>
         </Row>
       </Column>
 
-
-
+   
+      
     </Column>
   );
 }
