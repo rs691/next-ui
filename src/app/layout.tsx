@@ -9,10 +9,10 @@ import { baseURL, style, meta, og, schema, social } from "@/once-ui/resources/co
 import { Background, Column, Flex, ToastProvider } from "@/once-ui/components";
 
 import { Inter } from "next/font/google";
-import { Roboto_Mono } from "next/font/google";
-
-const primary = Inter({
+import { Roboto_Mono, Anybody as Roboto} from "next/font/google";
+const primary = Roboto({
   variable: "--font-primary",
+  weight: "300",
   subsets: ["latin"],
   display: "swap",
 });

@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { MdOutlineCastForEducation } from "react-icons/md";
+
 
 import {
   Heading,
   Text,
   Button,
-  Icon,
 SmartLink,
 
   Line,
@@ -35,16 +34,12 @@ export default function Home() {
 
 
 
-  const handleSelect = (value: string) => {
-    console.log("Selected option:", value);
-    setSelectedValue(value);
-  };
 
   const links = [
     {
-      href: "https://once-ui.com/docs/theming",
-      title: "Themes",
-      description: "Style your app in minutes",
+      href: "https://www.linkedin.com/in/robert-stewart-m",
+      title: "LinkedIn",
+      description: "Check out my professional profile",
     },
     {
       href: "https://once-ui.com/docs/RowComponent",
@@ -58,6 +53,24 @@ export default function Home() {
     },
   ];
 
+
+  const projects = [
+    {
+      title: "Project One",
+      description: "A full-stack web application built with Next.js and MongoDB",
+      link: "https://github.com/yourusername/project-one"
+    },
+    {
+      title: "Project Two",
+      description: "Mobile-first responsive dashboard using React and D3.js",
+      link: "https://github.com/yourusername/project-two"
+    },
+    {
+      title: "Project Three",
+      description: "Real-time chat application with WebSocket integration",
+      link: "https://github.com/yourusername/project-three"
+    }
+  ];
 
 
 
@@ -78,7 +91,7 @@ export default function Home() {
         fillWidth
         blur={0.25}
       />
-     <MdOutlineCastForEducation />
+   
       <Row position="fixed" top="0" fillWidth horizontal="center" zIndex={3}>
         <Row
           data-border="rounded"
@@ -92,24 +105,14 @@ export default function Home() {
           <Row gap="12" hide="s">
 
             <Button
-              href="https://github.com/once-ui-system/nextjs-starter"
-              prefixIcon="github"
+              href="#projects"
               size="s"
-              label="GitHub"
-              weight="default"
+              label="Projects"
               variant="tertiary"
             />
             <StyleOverlay top="20" right="24" />
           </Row>
-          <Row gap="16" show="s" horizontal="center" paddingRight="24">
-
-            <IconButton
-              href="https://github.com/once-ui-system/nextjs-starter"
-              icon="github"
-              variant="tertiary"
-            />
-            <StyleOverlay top="20" right="24" />
-          </Row>
+      
         </Row>
       </Row>
 
@@ -199,7 +202,7 @@ export default function Home() {
           </Column>
           <Column fillWidth paddingX="32" gap="12" horizontal="center" position="relative">
             <Heading as="h2" variant="display-default-m">
-              Showcase
+              About Me
             </Heading>
             <Text marginBottom="32" align="center" onBackground="neutral-weak">
               Tiny snippets to inspire your next project
@@ -254,6 +257,9 @@ export default function Home() {
               </Column>
             </Row>
           </Column>
+
+
+
         </Column>
 
         {/* PAYMENT */}
@@ -314,6 +320,11 @@ export default function Home() {
                     colorEnd: "accent-solid-weak",
                   }}
                 >
+                  <img
+                    src="/images/back.jpg"
+                    alt="des"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
 
                 </Background>
               </HoloFx>
@@ -548,8 +559,10 @@ export default function Home() {
                   border={undefined}
                   radius={undefined}
                 >
-
-
+                  <Heading as="h3" variant="display-default-s">
+                    {link.title}
+                  </Heading>
+                  <Text>{link.description}</Text>
                 </Card>
               </SmartLink>
             ))}
@@ -589,9 +602,8 @@ export default function Home() {
           >
 
 
-            <SmartLink href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">
-              Robert Stewart
-            </SmartLink>
+             Robert Stewart
+          
           </Column>
         </Row>
       </Column>
